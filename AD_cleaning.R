@@ -126,10 +126,10 @@ data$income = ifelse(data$income == data$income[1],0,1)
 #-------------------------------------------------------------------------
 
 # applying normlization
-#data1 <- data[c("age","hr_per_week","income","set")]
-#data2 <- data[c(2:10)]
-#data3 <- model.matrix(~ . + 0, data=data2, contrasts.arg = lapply(data2, contrasts, contrasts=FALSE))
-#data <- cbind(data3,data1)
+data1 <- data[c("age","hr_per_week","income","set")]
+data2 <- data[c(2:10)]
+data3 <- model.matrix(~ . + 0, data=data2, contrasts.arg = lapply(data2, contrasts, contrasts=FALSE))
+data <- cbind(data3,data1)
 
 
 ## train test split
@@ -139,17 +139,18 @@ train$set <- NULL
 test$set <- NULL
 
 # convert factor features to numeric
-FacToNum <- function(input) {
-  for(i in 1:ncol(input)){
-      if(any(class(input[,i]) == "factor")) { 
-      input[,i] <- as.integer(as.factor(input[,i])) - 1  
-      }
-  }
-  input
-}
+#FacToNum <- function(input) {
+#  for(i in 1:ncol(input)){
+#      if(any(class(input[,i]) == "factor")) { 
+#      input[,i] <- as.integer(as.factor(input[,i])) - 1  
+#      }
+#  }
+#  input
+#}
 
-train <- FacToNum(train)
-test <- FacToNum(test)
+
+#train <- FacToNum(train)
+#test <- FacToNum(test)
 
 write.table(train, file = "clean_data/adult_train.txt", row.names = FALSE, col.names = TRUE, sep = ",")
 write.table(test, file = "clean_data/adult_test.txt", row.names = FALSE, col.names = TRUE, sep = ",")
