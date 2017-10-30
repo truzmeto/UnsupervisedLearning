@@ -12,24 +12,22 @@ knitr::opts_chunk$set(echo = TRUE)
 ### K-means Clustering
 
 Randomly initilize K centroids in a given space (2D, 3D, ..), where N-features defines dimention. Then for each data point calculate distance to
-all centroids and choose the closest centroid to assign a label. After assignment is complete, move each centroid to the center of mass location of
-corresponding class(label). Reitarate until locations of centroids converge to some position.  
+all centroids and choose the closest centroid to assign a label. After assignment is complete, move each centroid to the
+geometrical center of corresponding class(label). Reitarate until locations of centroids converge to some position.
 
+However, the k-means algorithm has at least two major theoretic shortcomings:
+    
+    1. First, it has been shown that the worst case running time of the algorithm is super-polynomial in the input size.
+    2. Second, the approximation found can be arbitrarily bad with respect to the objective function compared to the
+    optimal clustering.
+
+The k-means++ algorithm addresses the second of these obstacles by specifying a procedure to initialize the cluster
+centers before proceeding with the standard k-means optimization iterations. With the k-means++ initialization, the
+algorithm is guaranteed to find a solution that is O(log k) competitive to the optimal k-means solution.
+
+In practice, the k-means algorithm is very fast (one of the fastest
+clustering algorithms available), but it falls in local minima. That's why
+it can be useful to restart it several times.
 
 ### Expectation Maximization Algorithm
 
-
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
