@@ -1,0 +1,35 @@
+---
+title: "CS7641 Macine Learning Assignment III by Georgia Tech: Unsupervised Learning"
+author: "T. Ruzmetov"
+date: "October 29, 2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### K-means Clustering
+
+Randomly initilize K centroids in a given space (2D, 3D, ..), where N-features defines dimention. Then for each data point calculate distance to
+all centroids and choose the closest centroid to assign a label. After assignment is complete, move each centroid to the center of mass location of
+corresponding class(label). Reitarate until locations of centroids converge to some position.  
+
+
+### Expectation Maximization Algorithm
+
+
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
