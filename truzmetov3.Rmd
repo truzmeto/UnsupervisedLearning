@@ -31,3 +31,18 @@ it can be useful to restart it several times.
 
 ### Expectation Maximization Algorithm
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
