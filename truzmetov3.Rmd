@@ -9,37 +9,39 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### K-means Clustering
+## Introduction
+
+
+## K-means Clustering
 
 Randomly initilize K centroids in a given space (2D, 3D, ..), where N-features defines dimention. Then for each data point calculate distance to
 all centroids and choose the closest centroid to assign a label. After assignment is complete, move each centroid to the
 geometrical center of corresponding class(label). Reitarate until locations of centroids converge to some position.
 
-However, the k-means algorithm has at least two major theoretic shortcomings:
-    
-    1. First, it has been shown that the worst case running time of the algorithm is super-polynomial in the input size.
-    2. Second, the approximation found can be arbitrarily bad with respect to the objective function compared to the
-    optimal clustering.
+In practice, the k-means algorithm is very fast (one of the fastest clustering algorithms available), but it is prone to fall into local minima.
+That's why it can be useful to restart it several times.
 
-The k-means++ algorithm addresses the second of these obstacles by specifying a procedure to initialize the cluster
-centers before proceeding with the standard k-means optimization iterations. With the k-means++ initialization, the
-algorithm is guaranteed to find a solution that is O(log k) competitive to the optimal k-means solution.
-
-In practice, the k-means algorithm is very fast (one of the fastest
-clustering algorithms available), but it falls in local minima. That's why
-it can be useful to restart it several times.
-
-### Expectation Maximization Algorithm
+The k-means++ algorithm offers a smart procedure to initialize the cluster centers, where it guarantees to find a solution that is O(log k)
+competitive to the optimal k-means solution.
 
 
 
+## Expectation Maximization Algorithm and Gaussian Mixture Models
+
+Expectation maximization (EM) is a numerical method for maximum likelihood estimation. EM guarantees to approach a local or
+global optima by increasing maximum likelihood of the data with subsequent iteration.  
+Here we use EM with gaussian mixture model. The algoritm basically consists of two main steps, where in a first step known as Expectation step, 
+we calculate expectation of the component assignment(labels) for each data point given the model parameters(gaussian parametrs: means $\mu_{k}$,
+weights $\phi_{k}$, standart deviations $\sigma_{k}$). The second step is Maximization step, which consists of maximizing the expectations calculated
+in a first step with respect to the model parameters. This step involves updating above mationed parameters iteratively. The entire process repeats
+until the algorithm converges to maximum likelihood estimate.
+
+
+## Dimentionality Reduction: PCA, ICA, RCA ...
 
 
 
-
-
-
-
+## Conclusion
 
 
 
