@@ -39,6 +39,20 @@ until the algorithm converges to maximum likelihood estimate.
 
 ## Dimentionality Reduction: PCA, ICA, RCA ...
 
+**PCA** 
+Principal component analysis (PCA) is a dimentionality reduction technique which converts a set of possibly correlated variables(features)
+into principal components which happens to be directions that capture most variance in data. For instance, if I have a data set composed of
+features $X_1=f(x)$, $X_2=g(x)$ and $X_3 = a*X_1 + b*X_2$ that is linear combination of 1st and second features. Then, applying PCA to above
+data can transform it from 3D to 2D. It is abvious that 1st and second features are sufficient to explain all variance in the model and
+3rd feature is just a linear combination of those two. 
+
+**ICA**
+Independent Component Analysis (ICA) is a powerful  technique to separate linearly mixed sources. It transforms original
+features, assuming they are linearly mixed, into independent components with zero mutual information. 
+The latent variables are assumed nongaussian and mutually independent, and they are called the independent
+components of the observed data.
+
+Kurtosis is the fourth central moment divided by the square of the variance. If Fisher’s definition is used, then 3.0 is subtracted from the result to give 0.0 for a normal distribution.
 
 
 ## Conclusion
