@@ -37,7 +37,7 @@ in a first step with respect to the model parameters. This step involves updatin
 until the algorithm converges to maximum likelihood estimate.
 
 
-## Dimentionality Reduction: PCA, ICA, RCA ...
+## Dimentionality Reduction: PCA, ICA, RPA, PCA Kernel Trick ...
 
 **PCA** 
 Principal component analysis (PCA) is a dimentionality reduction technique which converts a set of possibly correlated variables(features)
@@ -50,9 +50,19 @@ data can transform it from 3D to 2D. It is abvious that 1st and second features 
 Independent Component Analysis (ICA) is a powerful  technique to separate linearly mixed sources. It transforms original
 features, assuming they are linearly mixed, into independent components with zero mutual information. 
 The latent variables are assumed nongaussian and mutually independent, and they are called the independent
-components of the observed data.
+components of the observed data. After applying ICA to whole data number of components can be reduced by choosing components with highest
+kurtosis, which is the fourth central moment divided by the square of the variance.
 
-Kurtosis is the fourth central moment divided by the square of the variance. If Fisher’s definition is used, then 3.0 is subtracted from the result to give 0.0 for a normal distribution.
+**Random Projection**
+
+Random projection is a technique used to reduce the dimensionality. Method is powerful, simple and good at preserving distances well after
+projection. In random projection, the original d-dimensional data is projected to a k-dimensional (k << d) subspace, using a random k × d 
+- dimensional matrix R whose rows have unit lengths.
+
+Using matrix notation: If X d × N is the original set of N d-dimensional observations, then X k × N R P = R k × d X d × N is the projection
+of the data onto a lower k-dimensional subspace. Random projection is computationally simple: form the random matrix "R" and project the
+d × N data matrix X onto K dimensions of order O ( d k N ) 
+
 
 
 ## Conclusion
