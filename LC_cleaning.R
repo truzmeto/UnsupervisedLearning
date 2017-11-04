@@ -60,22 +60,37 @@ for(i in 1:ncol(data)){
   }
 }
 
+#####################################################################################
 # convert factor features to numeric
-FacToNum <- function(input) {
-    for(i in 1:ncol(input)){
-        if(any(class(input[,i]) == "factor")) { 
-            input[,i] <- as.integer(as.factor(input[,i])) - 1  
-        }
-    }
-    input
-}
+#FacToNum <- function(input) {
+#    for(i in 1:ncol(input)){
+#        if(any(class(input[,i]) == "factor")) { 
+#            input[,i] <- as.integer(as.factor(input[,i])) - 1  
+#        }
+#    }
+#    input
+#}
 
-data <- FacToNum(data)
+#data <- FacToNum(data)
+####################################################################################
+
+
+# pply one-hot-encoding to categorical features
+data1 <- data[c("home_ownership","verification_status","grade")]
+data2 <- model.matrix(~ . + 0, data=data1, contrasts.arg = lapply(data1, contrasts, contrasts=FALSE))
+data$home_ownership <- NULL
+data$verification_status <- NULL
+data$grade <- NULL
+data <- cbind(data,data2)
+
 
 set.seed(100)
 indx <- createDataPartition(y=data$loan_status, p = 0.90, list=FALSE)
 train <- data[indx, ]
+indx1 <- createDataPartition(y=train$loan_status, p = 0.25, list=FALSE)
+train <- train[indx1, ]
 test <- data[-indx, ] 
+
 
 write.table(train, file = "clean_data/loan_train.txt", row.names = FALSE, col.names = TRUE, sep = ",")
 write.table(test, file = "clean_data/loan_test.txt", row.names = FALSE, col.names = TRUE, sep = ",")
