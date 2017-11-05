@@ -9,7 +9,7 @@ output:
 ---
 
 \fontfamily{cmr}
-\fontsize{11}{20}
+\fontsize{10}{15}
 \selectfont
 
 
@@ -18,35 +18,104 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-## Introduction
+## Assignment Description
+
+In this assignment we are asked to apply and explore the role of two unsupervised learning algorithms such as K-means Clustering
+and Expectation Maximization on two data sets. Along with that, we are to investigate how dimensionality reduction techniques
+such as PCA, ICA, RP, FA help speeding up performance by rducing the dimension of feature space. In addition, we are expected to
+apply the dimensionality reduction algorithms to one of the datasets(done already) from assignment #1 and rerun neural network
+learner on the newly projected data. 
+Apply the clustering algorithms to the same dataset to which you just applied the dimensionality reduction algorithms, treating the
+clusters as if they were new features. In other words, treat the clustering algorithms as if they were dimensionality reduction
+algorithms. Again, rerun your neural network learner on the newly projected data.
+
+
+
+## Data Sets 
+
+**Lending Club Data**
+Lending Club is the world’s largest online marketplace connecting borrowers and investors. Getting loan has become
+common practice in developed countries, which makes it interesting to learn how banks determine customer eligibility
+or credit worthiness given some information. In this problem, we apply unsupervised learning methods to predict if
+customer is going to pay or default on their loan based on provided set of features. After cleaning and feature extraction,
+the data set contains 15 features and 285373 samples. 90% of entire data is allocated to training set and 10% is separated
+out for testing. Then only only 30% of the training set is used for model training due to large size resulting in high time consumption. "One-hot_encoding" is applied to all categorical features which increased n featrest from 15 to 28.
+
+**Adult Data** 
+The adult data set contains census information from 1994.  Our task is to predict whether a person makes more
+than $50K/year. After preprocessing is applied, there are 11 features and 45000 remaining instances. "One-hot_encoding" is
+applied to all categorical features which increased n featrest from 11 to 65. The target feature "income" is labeled as "1"
+when income is greater than $50K and "0" when it is less. 
 
 
 ## K-means Clustering
 
-Randomly initilize K centroids in a given space (2D, 3D, ..), where N-features defines dimention. Then for each data point calculate distance to
-all centroids and choose the closest centroid to assign a label. After assignment is complete, move each centroid to the
-geometrical center of corresponding class(label). Reitarate until locations of centroids converge to some position.
+In K-means algorithm we randomly initilize K centroids in a given space (2D, 3D, ..), where N-features defines dimention. Then for
+each data point we calculate distance to all centroids(cluster centers) and choose the closest centroid to assign a label. After assignment
+is complete, we move each centroid to the geometrical center of corresponding class(label). We proceed by reitarating until locations of
+centroids converge to some position. In practice, the k-means algorithm is very fast (one of the fastest clustering algorithms available),
+but it is prone to fall into local minima. That's why it can be useful to restart it several times. The k-means++ algorithm offers a smart
+procedure to initialize the cluster centers, where it guarantees to find a solution that is O(log k). 
 
-In practice, the k-means algorithm is very fast (one of the fastest clustering algorithms available), but it is prone to fall into local minima.
-That's why it can be useful to restart it several times.
+\begin{figure}
+  \center
+    \includegraphics[width=15.0cm]{plots/AD_ModComp_Kmeans.pdf}
+  \center
+  \caption{}
+  \label{fig:AD_mod_comp_km}
+\end{figure}
 
-The k-means++ algorithm offers a smart procedure to initialize the cluster centers, where it guarantees to find a solution that is O(log k)
-competitive to the optimal k-means solution.
+
+\begin{figure}
+  \center
+    \includegraphics[width=15.0cm]{plots/LC_ModComp_Kmeans.pdf}
+  \center
+  \caption{}
+  \label{fig:LC_mod_comp_km}
+\end{figure}
+
+
+\pagebreak
+
 
 
 
 ## Expectation Maximization Algorithm and Gaussian Mixture Models
 
 Expectation maximization (EM) is a numerical method for maximum likelihood estimation. EM guarantees to approach a local or
-global optima by increasing maximum likelihood of the data with subsequent iteration.  
-Here we use EM with gaussian mixture model. The algoritm basically consists of two main steps, where in a first step known as Expectation step, 
-we calculate expectation of the component assignment(labels) for each data point given the model parameters(gaussian parametrs: means $\mu_{k}$,
-weights $\phi_{k}$, standart deviations $\sigma_{k}$). The second step is Maximization step, which consists of maximizing the expectations calculated
-in a first step with respect to the model parameters. This step involves updating above mationed parameters iteratively. The entire process repeats
-until the algorithm converges to maximum likelihood estimate.
+global optima by increasing maximum likelihood of the data with subsequent iteration. Here we use EM with gaussian mixture model.
+The algoritm basically consists of two main steps, where in a first step known as Expectation step, we calculate expectation of the
+component assignment(labels) for each data point given the model parameters(gaussian parametrs: means $\mu_{k}$, weights $\phi_{k}$,
+standart deviations $\sigma_{k}$). The second step is Maximization step, which consists of maximizing the expectations calculated in a
+first step with respect to the model parameters. This step involves updating above mationed parameters iteratively. The entire process
+repeats until the algorithm converges to maximum likelihood estimate.
 
 
-## Dimentionality Reduction: PCA, ICA, RPA, PCA Kernel Trick ...
+\begin{figure}
+  \center
+    \includegraphics[width=15.0cm]{plots/AD_ModComp_EM.pdf}
+  \center
+  \caption{}
+  \label{fig:AD_mod_comp_EM}
+\end{figure}
+
+
+
+\begin{figure}
+  \center
+    \includegraphics[width=15.0cm]{plots/LC_ModComp_EM.pdf}
+  \center
+  \caption{}
+  \label{fig:LC_mod_comp_EM}
+\end{figure}
+
+
+
+\pagebreak
+
+
+
+## Dimentionality Reduction: PCA, ICA, RPA, FA
 
 **PCA** 
 Principal component analysis (PCA) is a dimentionality reduction technique which converts a set of possibly correlated variables(features)
@@ -55,6 +124,19 @@ features $X_1=f(x)$, $X_2=g(x)$ and $X_3 = a*X_1 + b*X_2$ that is linear combina
 data can transform it from 3D to 2D. It is abvious that 1st and second features are sufficient to explain all variance in the model and
 3rd feature is just a linear combination of those two. 
 
+\begin{figure}
+  \center
+    \includegraphics[width=15.0cm]{plots/AD_pca.pdf}
+    \includegraphics[width=15.0cm]{plots/LC_pca.pdf}
+  \center
+  \caption{}
+  \label{fig:pca}
+\end{figure}
+
+
+\pagebreak
+
+
 **ICA**
 Independent Component Analysis (ICA) is a powerful  technique to separate linearly mixed sources. It transforms original
 features, assuming they are linearly mixed, into independent components with zero mutual information. 
@@ -62,44 +144,60 @@ The latent variables are assumed nongaussian and mutually independent, and they 
 components of the observed data. After applying ICA to whole data number of components can be reduced by choosing components with highest
 kurtosis, which is the fourth central moment divided by the square of the variance.
 
-**Random Projection**
+\begin{figure}
+  \center
+    \includegraphics[width=15.0cm]{plots/AD_ica.pdf}
+    \includegraphics[width=15.0cm]{plots/LC_ica.pdf}
+  \center
+  \caption{}
+  \label{fig:ica}
+\end{figure}
+
+
+\pagebreak
+
+
+
+## Random Projection
 
 Random projection is a technique used to reduce the dimensionality. Method is powerful, simple and good at preserving distances well after
 projection. In random projection, the original d-dimensional data is projected to a k-dimensional (k << d) subspace, using a random k × d 
 - dimensional matrix R whose rows have unit lengths.
 
-Using matrix notation: If X d × N is the original set of N d-dimensional observations, then X k × N R P = R k × d X d × N is the projection
-of the data onto a lower k-dimensional subspace. Random projection is computationally simple: form the random matrix "R" and project the
-d × N data matrix X onto K dimensions of order O ( d k N ) 
-
-
-
-## 1. Run the clustering algorithms on the data sets and describe what you see
-
 \begin{figure}
   \center
-    \includegraphics[width=14.0cm]{plots/AD_ModComp_EM.pdf}
-    \includegraphics[width=14.0cm]{plots/AD_ModComp_Kmeans.pdf}
+    \includegraphics[width=7.0cm]{plots/AD_rpa.pdf}
+    \includegraphics[width=7.0cm]{plots/LC_rpa.pdf}
   \center
   \caption{}
-  \label{fig:cross_val_nnet}
+  \label{fig:rpa}
 \end{figure}
 
 
-
-## 2. Apply the dimensionality reduction algorithms to the two datasets and describe what you see 
-
+\pagebreak
 
 
+### Factor Analysis (FA)
 
-## 3. Reproduce your clustering experiments, but on the data after you've run dimensionality reduction on them 
+Factor Analysis is probabilistic models.
+FA uses likelihood of new data for model selection and covariance estimation. 
+When data is corrupted with heteroscedastic(noise variance is the different for each feature) noise, FA is  
+
+
+\begin{figure}
+  \center
+    \includegraphics[width=7.0cm]{plots/AD_fa.pdf}
+    \includegraphics[width=7.0cm]{plots/LC_fa.pdf}
+  \center
+  \caption{}
+  \label{fig:fa}
+\end{figure}
+
+
+\pagebreak
 
 
 
-## 4. Rerun your neural network learner on the newly projected(reduced dimension) data
-
-
-## 5. Apply the clustering algorithms to the same dataset to which you just applied the dimensionality reduction algorithms, treating the clusters as if they were new features. In other words, treat the clustering algorithms as if they were dimensionality reduction algorithms. Again, rerun your neural network learner on the newly projected data.
 
 
 ## Conclusion
