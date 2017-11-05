@@ -2,12 +2,21 @@
 title: "CS7641 Macine Learning Assignment III by Georgia Tech: Unsupervised Learning"
 author: "T. Ruzmetov"
 date: "October 29, 2017"
-output: pdf_document
+output:
+    pdf_document:
+        fig_caption: yes
+
 ---
+
+\fontfamily{cmr}
+\fontsize{11}{20}
+\selectfont
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
 
 ## Introduction
 
@@ -63,6 +72,34 @@ Using matrix notation: If X d × N is the original set of N d-dimensional observ
 of the data onto a lower k-dimensional subspace. Random projection is computationally simple: form the random matrix "R" and project the
 d × N data matrix X onto K dimensions of order O ( d k N ) 
 
+
+
+## 1. Run the clustering algorithms on the data sets and describe what you see
+
+\begin{figure}
+  \center
+    \includegraphics[width=14.0cm]{plots/AD_ModComp_EM.pdf}
+    \includegraphics[width=14.0cm]{plots/AD_ModComp_Kmeans.pdf}
+  \center
+  \caption{}
+  \label{fig:cross_val_nnet}
+\end{figure}
+
+
+
+## 2. Apply the dimensionality reduction algorithms to the two datasets and describe what you see 
+
+
+
+
+## 3. Reproduce your clustering experiments, but on the data after you've run dimensionality reduction on them 
+
+
+
+## 4. Rerun your neural network learner on the newly projected(reduced dimension) data
+
+
+## 5. Apply the clustering algorithms to the same dataset to which you just applied the dimensionality reduction algorithms, treating the clusters as if they were new features. In other words, treat the clustering algorithms as if they were dimensionality reduction algorithms. Again, rerun your neural network learner on the newly projected data.
 
 
 ## Conclusion
