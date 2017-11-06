@@ -1,36 +1,7 @@
 #!/bin/bash
-# edit the classpath to to the location of your ABAGAIL jar file
-export CLASSPATH=../ABAGAIL/ABAGAIL.jar:$CLASSPATH
-mkdir -p data plots output clen_data
 
-# continuous peaks
-echo "continuous peaks"
-jython continuouspeaks.py > output/count_peaks.txt
-
-# knapsack
-echo "Running knapsack"
-jython knapsack.py > output/knapsack.txt
-
-# traveling salesman
-echo "Running traveling salesman test"
-jython travelingsalesman.py > output/tr_sales.txt
-
-# adult data
-echo "preprocessing adult data"
+mkdir -p output clean_data plots
+Rscript LC_cleaning.R
 Rscript AD_cleaning.R
-
-echo "Applying RHC to Adult Data "
-jython nn_rhc.py > output/AD_results_rhc
-
-echo "Applying SA to Adult Data "
-jython nn_sa.py > output/AD_results_sa
-
-echo "Applying GA to Adult Data "
-jython nn_ga.py > output/AD_results_ga
-
-echo "Applying bprop to Adult Data "
-jython nn_bprop.py > output/AD_results_bprop
-
-echo "rendering .Rmd to pdf"
-Rscript -e "rmarkdown::render('truzmetov3.Rmd')"
-echo "done"
+python AD.py
+python LC.py
