@@ -32,9 +32,10 @@ train = (a - a.mean()) / np.std(a)
 b = test
 test = (b - b.mean()) / np.std(b)
 
-
 #apply k-means
-kmeans = KMeans(n_clusters=n_centroids, n_init=1, n_jobs=4, random_state=n_seed)
+kmeans = KMeans(n_clusters=n_centroids,
+                n_init=1,
+                random_state=n_seed)
 kmeans.fit(train)
 print(confusion_matrix(train_labels,kmeans.labels_))
 print(classification_report(train_labels,kmeans.labels_))
@@ -56,7 +57,9 @@ sil = []
 time_clust = []
 for iclusters in range(2,nclusters):
     start = time.time()
-    clusterer = KMeans(n_clusters=iclusters,random_state=n_seed, n_init=1)
+    clusterer = KMeans(n_clusters=iclusters,
+                       random_state=n_seed,
+                       n_init=1)
     cluster_labels = clusterer.fit_predict(X)
     end = time.time()
     sil.append(silhouette_score(X, cluster_labels))
@@ -70,13 +73,19 @@ time_sample = []
 niter = nclusters # just for plotting them togather
 for iiter in range(2,niter):
     start = time.time() # iterations
-    clusterer = KMeans(n_clusters= 2, random_state=iiter, n_init = iiter, max_iter = 100)
+    clusterer = KMeans(n_clusters= 2,
+                       random_state=iiter,
+                       n_init = iiter,
+                       max_iter = 100)
     cluster_labels = clusterer.fit_predict(X)
     end = time.time()
     time_iter.append(end - start)    
     start = time.time() # samples
     isample = int(data_frac * iiter/100)
-    clusterer = KMeans(n_clusters= 2, random_state=n_seed, n_init = 1, max_iter = 100)
+    clusterer = KMeans(n_clusters= 2,
+                       random_state=n_seed,
+                       n_init = 1,
+                       max_iter = 100)
     cluster_labels = clusterer.fit_predict(X[0:isample])
     end = time.time()
     time_sample.append(end - start)      
