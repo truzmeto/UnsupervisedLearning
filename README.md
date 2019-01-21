@@ -1,6 +1,6 @@
-#Unsupervised Learning Project
+# Unsupervised Learning Project
 
-##Introduction
+## Introduction
 
 Here we apply and explore the role of two unsupervised learning algorithms such as
 K-means Clustering and Expectation Maximization on two distinct data sets. Adittionally, we
