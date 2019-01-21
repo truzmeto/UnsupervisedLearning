@@ -14,12 +14,10 @@ performance by reducing the dimension of feature space.
 
 **To genarate results type the following in cmd:**
 
+```bash
 mkdir -p output clean_data plots
-
 Rscript LC_cleaning.R
-
 Rscript AD_cleaning.R
-
 python AD.py
-
 python LC.py
+```
